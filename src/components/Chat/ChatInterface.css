@@ -98,9 +98,18 @@
 
 /* Input Area */
 .input-area-wrapper {
-  padding: 20px 24px;
+  padding: 12px 16px;
+  padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   background: linear-gradient(to top, var(--bg-color) 60%, transparent);
   z-index: 5;
+  flex-shrink: 0;
+}
+
+@media (min-width: 768px) {
+  .input-area-wrapper {
+    padding: 20px 24px;
+    padding-bottom: 24px;
+  }
 }
 
 .input-container {
