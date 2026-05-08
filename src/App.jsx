@@ -20,7 +20,7 @@ const mockAdmin = {
 
 const mockStudent = {
   "_id": "681cf2d8a123456789abcd02",
-  "name": "Nishank Kansara",
+  "name": "Mock Student",
   "email": "nishank@gmail.com",
   "password": "$2a$10$hashedPassword",
   "classLevel": "10",
@@ -47,10 +47,10 @@ function App() {
 
   if (!isAuthenticated) {
     return (
-      <LoginScreen 
-        onLogin={handleLogin} 
-        mockStudent={mockStudent} 
-        mockAdmin={mockAdmin} 
+      <LoginScreen
+        onLogin={handleLogin}
+        mockStudent={mockStudent}
+        mockAdmin={mockAdmin}
       />
     );
   }
@@ -61,52 +61,52 @@ function App() {
         <div className="app-container">
           <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
           {/* Main Chat View */}
-        <div className="main-view" style={{ transform: isSettingsOpen ? 'scale(0.95)' : 'scale(1)', filter: isSettingsOpen ? 'blur(4px)' : 'none' }}>
-          <header className="top-bar">
-            <div className="brand">
-              <button className="icon-btn mobile-menu-btn" style={{ marginRight: '8px' }} onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Toggle Sidebar">
-                <Menu size={20} />
-              </button>
-              <Bot className="brand-icon" size={28} />
-              <span>StudyBuddy AI</span>
-            </div>
-            
-            <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
-              
-              <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
-                <User size={16} />
-                <span className="hide-on-mobile">{currentUser.name} ({currentUser.role})</span>
+          <div className="main-view" style={{ transform: isSettingsOpen ? 'scale(0.95)' : 'scale(1)', filter: isSettingsOpen ? 'blur(4px)' : 'none' }}>
+            <header className="top-bar">
+              <div className="brand">
+                <button className="icon-btn mobile-menu-btn" style={{ marginRight: '8px' }} onClick={() => setIsSidebarOpen(!isSidebarOpen)} aria-label="Toggle Sidebar">
+                  <Menu size={20} />
+                </button>
+                <Bot className="brand-icon" size={28} />
+                <span>StudyBuddy AI</span>
               </div>
 
-              {currentUser.role === 'ADMIN' && (
-                <button 
-                  className="icon-btn" 
-                  onClick={() => setIsSettingsOpen(true)}
-                  aria-label="Settings"
-                  title="Settings"
+              <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+
+                <div style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--text-muted)', fontSize: '0.9rem' }}>
+                  <User size={16} />
+                  <span className="hide-on-mobile">{currentUser.name} ({currentUser.role})</span>
+                </div>
+
+                {currentUser.role === 'ADMIN' && (
+                  <button
+                    className="icon-btn"
+                    onClick={() => setIsSettingsOpen(true)}
+                    aria-label="Settings"
+                    title="Settings"
+                  >
+                    <SettingsIcon size={20} />
+                  </button>
+                )}
+
+                <button
+                  className="icon-btn"
+                  onClick={handleLogout}
+                  aria-label="Logout"
+                  title="Logout"
                 >
-                  <SettingsIcon size={20} />
+                  <LogOut size={20} />
                 </button>
-              )}
+              </div>
+            </header>
 
-              <button 
-                className="icon-btn" 
-                onClick={handleLogout}
-                aria-label="Logout"
-                title="Logout"
-              >
-                <LogOut size={20} />
-              </button>
-            </div>
-          </header>
-          
-          <ChatInterface />
-        </div>
+            <ChatInterface />
+          </div>
 
-        {/* Settings Modal Overlay */}
-        <div className={`settings-overlay ${isSettingsOpen ? 'open' : ''}`}>
-           <SettingsPanel onClose={() => setIsSettingsOpen(false)} />
-        </div>
+          {/* Settings Modal Overlay */}
+          <div className={`settings-overlay ${isSettingsOpen ? 'open' : ''}`}>
+            <SettingsPanel onClose={() => setIsSettingsOpen(false)} />
+          </div>
         </div>
       </ChatProvider>
     </SettingsProvider>
