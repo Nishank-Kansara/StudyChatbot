@@ -18,9 +18,17 @@
   scroll-behavior: smooth;
 }
 
+@media (max-width: 768px) {
+  .messages-area {
+    padding: 12px 16px;
+    gap: 16px;
+  }
+}
+
 .message-bubble-wrapper {
   display: flex;
   max-width: 85%;
+  align-items: flex-start;
 }
 
 .message-bubble-wrapper.user {
@@ -42,16 +50,17 @@
   background: var(--glass-bg);
   border: 1px solid var(--glass-border);
   flex-shrink: 0;
-  margin: 0 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 }
 
 .message-bubble-wrapper.user .avatar {
   background: linear-gradient(135deg, var(--primary-color), #818cf8);
+  margin-left: 12px;
 }
 
 .message-bubble-wrapper.ai .avatar {
   background: linear-gradient(135deg, var(--secondary-color), #f472b6);
+  margin-right: 12px;
 }
 
 .message-content {
@@ -79,13 +88,15 @@
 }
 
 .message-bubble-wrapper.user .message-content {
-  border-bottom-right-radius: 4px;
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 20px;
   background: rgba(99, 102, 241, 0.15);
   border-color: rgba(99, 102, 241, 0.3);
 }
 
 .message-bubble-wrapper.ai .message-content {
-  border-bottom-left-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 20px;
   background: rgba(255, 255, 255, 0.05);
 }
 
@@ -230,4 +241,68 @@
   align-items: center;
   cursor: pointer;
   font-size: 12px;
+}
+
+/* Typing Indicator Animation */
+.typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px;
+}
+
+.typing-indicator span {
+  display: block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.7);
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-indicator span:nth-child(1) {
+  animation-delay: -0.32s;
+}
+
+.typing-indicator span:nth-child(2) {
+  animation-delay: -0.16s;
+}
+
+@keyframes typingBounce {
+  0%, 80%, 100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* Empty State Styles */
+.empty-state-wrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  width: 100%;
+}
+
+.lottie-container {
+  width: 160px;
+  height: 160px;
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.centered-input-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.centered-input-container .input-area-wrapper {
+  padding: 0;
+  background: transparent;
 }

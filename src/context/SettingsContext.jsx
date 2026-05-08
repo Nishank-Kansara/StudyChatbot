@@ -6,11 +6,15 @@ export const SettingsProvider = ({ children }) => {
   const [settings, setSettings] = useState(() => {
     const saved = localStorage.getItem('chatbot-settings');
     return saved ? JSON.parse(saved) : {
-      aiProvider: 'gemini', // default
-      azureEndpoint: '',
-      azureDeploymentName: '',
+      provider: 'GEMINI',
+      modelName: 'gemini-2.5-pro',
       apiKey: '',
-      mongoDbUri: '',
+      baseUrl: 'https://generativelanguage.googleapis.com',
+      temperature: 0.6,
+      topP: 0.7,
+      maxTokens: 1500,
+      streamEnabled: true,
+      systemPrompt: 'You are a teacher who explains concepts in very simple language for students from class 7th to 12th.',
       clientConnectionUrl: ''
     };
   });

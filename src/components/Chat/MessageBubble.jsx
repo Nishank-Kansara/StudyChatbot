@@ -2,7 +2,7 @@ import React from 'react';
 import { Bot, User } from 'lucide-react';
 
 const MessageBubble = ({ message }) => {
-  const isUser = message.sender === 'user';
+  const isUser = message.sender?.toLowerCase() === 'user';
 
   return (
     <div className={`message-bubble-wrapper ${isUser ? 'user' : 'ai'}`}>
@@ -11,7 +11,7 @@ const MessageBubble = ({ message }) => {
       </div>
       
       <div className="message-content">
-        <div className="text">{message.text}</div>
+        <div className="text">{message.message || message.text}</div>
         
         {message.images && message.images.length > 0 && (
           <div className="message-images-grid" style={{ display: 'flex', gap: '8px', flexWrap: 'wrap', marginTop: '10px' }}>

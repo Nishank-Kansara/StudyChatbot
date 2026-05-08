@@ -21,10 +21,10 @@ const SettingsPanel = ({ onClose }) => {
           <AIConnectionSettings />
         </div>
 
-        <div className="settings-section">
+        {/* <div className="settings-section">
           <h3><Database size={18} /> Database Connection</h3>
           <DatabaseSettings />
-        </div>
+        </div> */}
 
         <div className="settings-section">
           <h3><LinkIcon size={18} /> Client Connection</h3>

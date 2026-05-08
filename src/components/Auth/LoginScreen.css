@@ -1,0 +1,148 @@
+.login-container {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: var(--bg-color);
+  background-image: var(--bg-gradient);
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  padding: 24px;
+}
+
+.login-card {
+  padding: 48px;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.login-header {
+  text-align: center;
+}
+
+.login-brand-icon {
+  color: var(--primary-color);
+  filter: drop-shadow(0 0 12px var(--primary-glow));
+  margin-bottom: 16px;
+}
+
+.login-header h1 {
+  margin-bottom: 8px;
+  font-size: 2rem;
+}
+
+.login-header p {
+  color: var(--text-muted);
+  font-size: 1rem;
+}
+
+.login-options {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.login-btn {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--glass-border);
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.login-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.05), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+}
+
+.login-btn:hover::before {
+  transform: translateX(100%);
+}
+
+.login-btn:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.login-btn:active {
+  transform: translateY(1px);
+}
+
+.student-btn:hover {
+  border-color: rgba(99, 102, 241, 0.5);
+  box-shadow: 0 8px 25px var(--primary-glow);
+}
+
+.admin-btn:hover {
+  border-color: rgba(236, 72, 153, 0.5);
+  box-shadow: 0 8px 25px var(--secondary-glow);
+}
+
+.login-btn-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: left;
+}
+
+.student-btn svg {
+  color: var(--primary-color);
+}
+
+.admin-btn svg {
+  color: var(--secondary-color);
+}
+
+.login-btn-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.login-role {
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.login-name {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+}
+
+@media (max-width: 480px) {
+  .login-card {
+    padding: 32px 24px;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

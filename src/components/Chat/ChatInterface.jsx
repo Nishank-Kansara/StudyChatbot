@@ -1,45 +1,67 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import MessageList from './MessageList';
 import MessageInput from './MessageInput';
+import { ChatContext } from '../../context/ChatContext';
+import LottieComponent from 'lottie-react';
+import bookLottie from '../../assets/book-lottie.json';
 import './ChatInterface.css';
 
+const Lottie = typeof LottieComponent === 'function' ? LottieComponent : LottieComponent.default || LottieComponent;
+
 const ChatInterface = () => {
-  const [messages, setMessages] = useState([
-    {
-      id: '1',
-      sender: 'ai',
-      text: "Hi there! I'm your StudyBuddy AI. I can help you with math, science, history, and more! You can even upload pictures of your homework. How can I help you today?",
-      images: []
+  const { chatMessages, activeCaseId, createNewChat, addMessage } = useContext(ChatContext);
+  const [isTyping, setIsTyping] = useState(false);
+
+  // If there's no active chat, create one on load
+  useEffect(() => {
+    if (!activeCaseId) {
+      createNewChat();
     }
-  ]);
+  }, [activeCaseId, createNewChat]);
+
+  const messages = activeCaseId && chatMessages[activeCaseId] ? chatMessages[activeCaseId] : [];
 
   const handleSendMessage = (text, images) => {
-    // 1. Add user message to UI
-    const newUserMsg = {
-      id: Date.now().toString(),
-      sender: 'user',
-      text,
-      images
-    };
-    
-    setMessages(prev => [...prev, newUserMsg]);
+    if (!activeCaseId) return;
 
-    // 2. Simulate AI response (In real app, call your backend/provider here)
+    // 1. Add user message
+    addMessage(activeCaseId, {
+      sender: 'USER',
+      message: text,
+      images: images
+    });
+
+    setIsTyping(true);
+
+    // 2. Simulate AI response
     setTimeout(() => {
-      const aiResponse = {
-        id: (Date.now() + 1).toString(),
-        sender: 'ai',
-        text: "That's an interesting question! I am a simulated response since we're currently in the frontend-only UI demo. Make sure to configure your AI Provider in the settings panel once the backend is hooked up!",
+      addMessage(activeCaseId, {
+        sender: 'AI',
+        message: "That's an interesting question! I am a simulated response since we're currently in the frontend-only UI demo. Make sure to configure your AI Provider in the settings panel once the backend is hooked up!",
         images: []
-      };
-      setMessages(prev => [...prev, aiResponse]);
+      });
+      setIsTyping(false);
     }, 1500);
   };
 
   return (
-    <div className="chat-container">
-      <MessageList messages={messages} />
-      <MessageInput onSend={handleSendMessage} />
+    <div className={`chat-container ${messages.length === 0 ? 'empty' : ''}`}>
+      {messages.length === 0 ? (
+        <div className="empty-state-wrapper">
+          <div className="lottie-container">
+            <Lottie animationData={bookLottie} loop={true} />
+          </div>
+          <h2 style={{ textAlign: 'center', marginBottom: '24px', color: 'var(--text-main)' }}>How can I help you today?</h2>
+          <div className="centered-input-container">
+             <MessageInput onSend={handleSendMessage} />
+          </div>
+        </div>
+      ) : (
+        <>
+          <MessageList messages={messages} isTyping={isTyping} />
+          <MessageInput onSend={handleSendMessage} />
+        </>
+      )}
     </div>
   );
 };
