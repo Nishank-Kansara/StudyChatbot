@@ -1,17 +1,17 @@
 import React, { useState, useRef } from 'react';
 import { Send, ImagePlus, X } from 'lucide-react';
-import { Tilt } from 'react-tilt';
+import Tilt from 'react-parallax-tilt'
 
 const tiltOptions = {
-  reverse:        false,
-  max:            5,     
-  perspective:    1000,   
-  scale:          1.01,    
-  speed:          1000,   
-  transition:     true,   
-  axis:           null,   
-  reset:          true,    
-  easing:         "cubic-bezier(.03,.98,.52,.99)", 
+  reverse: false,
+  max: 5,
+  perspective: 1000,
+  scale: 1.01,
+  speed: 1000,
+  transition: true,
+  axis: null,
+  reset: true,
+  easing: "cubic-bezier(.03,.98,.52,.99)",
 }
 
 const MessageInput = ({ onSend }) => {
@@ -24,11 +24,11 @@ const MessageInput = ({ onSend }) => {
     onSend(text, images);
     setText('');
     setImages([]);
-    
+
     // Reset textarea height after sending
     if (fileInputRef.current && fileInputRef.current.nextElementSibling) {
-       const textarea = document.querySelector('.chat-input');
-       if (textarea) textarea.style.height = 'auto';
+      const textarea = document.querySelector('.chat-input');
+      if (textarea) textarea.style.height = 'auto';
     }
   };
 
@@ -68,24 +68,24 @@ const MessageInput = ({ onSend }) => {
     <div className="input-area-wrapper">
       <Tilt options={tiltOptions}>
         <div className="input-container">
-          
-          <button 
-            className="action-btn" 
+
+          <button
+            className="action-btn"
             onClick={() => fileInputRef.current?.click()}
             aria-label="Upload Image"
           >
             <ImagePlus size={22} />
           </button>
-          
-          <input 
-            type="file" 
-            ref={fileInputRef} 
-            style={{ display: 'none' }} 
-            accept="image/*" 
+
+          <input
+            type="file"
+            ref={fileInputRef}
+            style={{ display: 'none' }}
+            accept="image/*"
             multiple
             onChange={handleImageUpload}
           />
-          
+
           <div style={{ flex: 1, display: 'flex', flexDirection: 'column' }}>
             {/* Image Previews */}
             {images.length > 0 && (
@@ -100,7 +100,7 @@ const MessageInput = ({ onSend }) => {
                 ))}
               </div>
             )}
-            
+
             <textarea
               className="chat-input"
               placeholder="Ask anything or share a photo of your homework..."
@@ -111,15 +111,15 @@ const MessageInput = ({ onSend }) => {
             />
           </div>
 
-          <button 
-            className="action-btn send-btn" 
+          <button
+            className="action-btn send-btn"
             onClick={handleSend}
             disabled={text.trim() === '' && images.length === 0}
             aria-label="Send Message"
           >
             <Send size={20} />
           </button>
-          
+
         </div>
       </Tilt>
     </div>
