@@ -1,9 +1,16 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Send, ImagePlus, X } from 'lucide-react';
 const MessageInput = ({ onSend }) => {
   const [text, setText] = useState('');
   const [images, setImages] = useState([]);
   const fileInputRef = useRef(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 768);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
 
   const handleSend = () => {
     if (text.trim() === '' && images.length === 0) return;
@@ -88,7 +95,7 @@ const MessageInput = ({ onSend }) => {
 
             <textarea
               className="chat-input"
-              placeholder="Ask anything or share a photo of your homework..."
+              placeholder={isMobile ? "Ask anything..." : "Ask anything or share a photo of your homework..."}
               value={text}
               onChange={handleTextChange}
               onKeyDown={handleKeyDown}

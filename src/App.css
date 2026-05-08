@@ -2,8 +2,10 @@
   display: flex;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   position: relative;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* For mobile, chat and settings will likely be toggleable panels. On desktop, they could sit side by side or remain toggleable for a cleaner UI. */
@@ -16,6 +18,7 @@
   z-index: 10;
   background: var(--bg-color);
   background-image: var(--bg-gradient);
+  overflow-y: auto;
 }
 
 .settings-overlay {
