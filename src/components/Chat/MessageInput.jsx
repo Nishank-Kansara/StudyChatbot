@@ -1,19 +1,5 @@
 import React, { useState, useRef } from 'react';
 import { Send, ImagePlus, X } from 'lucide-react';
-import Tilt from 'react-parallax-tilt'
-
-const tiltOptions = {
-  reverse: false,
-  max: 5,
-  perspective: 1000,
-  scale: 1.01,
-  speed: 1000,
-  transition: true,
-  axis: null,
-  reset: true,
-  easing: "cubic-bezier(.03,.98,.52,.99)",
-}
-
 const MessageInput = ({ onSend }) => {
   const [text, setText] = useState('');
   const [images, setImages] = useState([]);
@@ -66,8 +52,7 @@ const MessageInput = ({ onSend }) => {
 
   return (
     <div className="input-area-wrapper">
-      <Tilt options={tiltOptions}>
-        <div className="input-container">
+      <div className="input-container">
 
           <button
             className="action-btn"
@@ -121,7 +106,6 @@ const MessageInput = ({ onSend }) => {
           </button>
 
         </div>
-      </Tilt>
     </div>
   );
 };
