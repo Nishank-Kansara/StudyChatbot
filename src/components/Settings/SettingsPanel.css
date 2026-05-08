@@ -125,3 +125,15 @@
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   transform: translateZ(30px);
 }
+
+@media (max-width: 768px) {
+  .settings-panel {
+    width: 100%;
+    padding: 20px 16px;
+    max-height: 95vh;
+  }
+  
+  .settings-section {
+    padding: 16px;
+  }
+}
