@@ -277,15 +277,33 @@
   }
 }
 
-/* Empty State Styles */
-.empty-state-wrapper {
-  flex: 1;
+/* Empty State Styles & Transitions */
+.messages-area-wrapper {
+  flex-grow: 1;
+  min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  position: relative;
+}
+
+.empty-state-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   align-items: center;
-  padding: 24px;
+  flex-grow: 1;
+  opacity: 1;
+  transition: opacity 0.4s ease, transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  transform: translateY(0);
+}
+
+.empty-state-content.hidden {
+  opacity: 0;
+  transform: translateY(-40px);
+  pointer-events: none;
+  position: absolute;
   width: 100%;
+  height: 100%;
 }
 
 .lottie-container {
@@ -297,12 +315,37 @@
   align-items: center;
 }
 
-.centered-input-container {
+.input-transition-wrapper {
   width: 100%;
   max-width: 800px;
+  margin: 0 auto;
+  transition: max-width 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  z-index: 10;
+  flex-shrink: 0;
 }
 
-.centered-input-container .input-area-wrapper {
-  padding: 0;
+.chat-container:not(.empty) .input-transition-wrapper {
+  max-width: 100%;
+}
+
+.chat-container.empty .input-transition-wrapper .input-area-wrapper {
   background: transparent;
+  transition: background 0.6s ease, padding 0.6s ease;
+}
+
+@media (min-width: 768px) {
+  .chat-container.empty .input-transition-wrapper .input-area-wrapper {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.bottom-spacer {
+  flex-grow: 0.0001;
+  transition: flex-grow 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+  flex-shrink: 0;
+}
+
+.chat-container.empty .bottom-spacer {
+  flex-grow: 1;
 }

@@ -46,22 +46,26 @@ const ChatInterface = () => {
 
   return (
     <div className={`chat-container ${messages.length === 0 ? 'empty' : ''}`}>
-      {messages.length === 0 ? (
-        <div className="empty-state-wrapper">
+      
+      <div className="messages-area-wrapper">
+        <div className={`empty-state-content ${messages.length === 0 ? 'visible' : 'hidden'}`}>
           <div className="lottie-container">
             <Lottie animationData={bookLottie} loop={true} />
           </div>
           <h2 style={{ textAlign: 'center', marginBottom: '24px', color: 'var(--text-main)' }}>How can I help you today?</h2>
-          <div className="centered-input-container">
-             <MessageInput onSend={handleSendMessage} />
-          </div>
         </div>
-      ) : (
-        <>
+
+        {messages.length > 0 && (
           <MessageList messages={messages} isTyping={isTyping} />
-          <MessageInput onSend={handleSendMessage} />
-        </>
-      )}
+        )}
+      </div>
+
+      <div className="input-transition-wrapper">
+        <MessageInput onSend={handleSendMessage} />
+      </div>
+
+      <div className="bottom-spacer" />
+
     </div>
   );
 };

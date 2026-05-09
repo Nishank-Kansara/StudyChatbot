@@ -12,7 +12,7 @@ const mockAdmin = {
   "_id": "681cf2d8a123456789abcd01",
   "name": "Admin",
   "email": "admin@studentchatbot.com",
-  "password": "$2a$10$hashedPassword",
+  "password": "admin123",
   "classLevel": null,
   "role": "ADMIN",
   "createdAt": "2026-05-08T21:45:00"
@@ -21,8 +21,8 @@ const mockAdmin = {
 const mockStudent = {
   "_id": "681cf2d8a123456789abcd02",
   "name": "Mock Student",
-  "email": "nishank@gmail.com",
-  "password": "$2a$10$hashedPassword",
+  "email": "mockstudent@gmail.com",
+  "password": "mockstudent123",
   "classLevel": "10",
   "role": "STUDENT",
   "createdAt": "2026-05-08T21:50:00"
